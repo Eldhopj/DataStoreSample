@@ -11,18 +11,14 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
+@Module
+@InstallIn(SingletonComponent::class)
 object DataStoreModule {
-
-    @Module
-    @InstallIn(SingletonComponent::class)
-    object DataStoreModule {
-        @Provides
-        @Singleton
-        fun provideDataStore(application: Application): DataStore<Preferences> {
-            return PreferenceDataStoreFactory.create {
-                application.preferencesDataStoreFile("data_store")
-            }
+    @Provides
+    @Singleton
+    fun provideDataStore(application: Application): DataStore<Preferences> {
+        return PreferenceDataStoreFactory.create {
+            application.preferencesDataStoreFile("data_store")
         }
     }
-
 }
